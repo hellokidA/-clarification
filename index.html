@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>clarification</title>
+  <style>
+    body {
+      background: #0b0b0b;
+      color: #e0e0e0;
+      font-family: monospace;
+      padding: 40px;
+    }
+    h1 {
+      color: #7dd3fc;
+    }
+    .cipher {
+      margin-top: 30px;
+      padding: 20px;
+      background: #111;
+      border-left: 4px solid #7dd3fc;
+    }
+    input {
+      background: #000;
+      color: #7dd3fc;
+      border: 1px solid #333;
+      padding: 8px;
+      margin-top: 10px;
+      width: 300px;
+    }
+    button {
+      margin-left: 10px;
+      padding: 8px 12px;
+      background: #7dd3fc;
+      border: none;
+      cursor: pointer;
+    }
+    #stage2, #final {
+      display: none;
+      margin-top: 40px;
+    }
+    .hint {
+      color: #999;
+      font-size: 0.9em;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>clarification</h1>
+
+<p>
+Alan Turing once noticed that even the most sophisticated machines
+fail when they repeat themselves.
+</p>
+
+<div class="cipher">
+  <p>
+    <strong>Encrypted message:</strong><br><br>
+    QFZVZ QEVXG ZYX QFZVZ
+  </p>
+
+  <div class="hint">
+    Hint: Enigma never encrypted a letter as itself.
+  </div>
+
+  <br>
+  <input id="password" placeholder="enter decoded word">
+  <button onclick="checkPassword()">submit</button>
+</div>
+
+<div id="stage2">
+  <h2>Second challenge</h2>
+  <p>
+    A system response curve is shown below.
+    Fill in the missing values.
+  </p>
+
+  <img src="diagram.png" alt="diagram" width="400">
+
+  <br><br>
+  <input id="a" placeholder="value A">
+  <input id="b" placeholder="value B">
+  <input id="c" placeholder="value C">
+  <button onclick="checkGraph()">verify</button>
+</div>
+
+<div id="final">
+  <h2>Final message</h2>
+  <p>
+    I built this because clarity matters to me.<br>
+    And because you matter more than you know.
+  </p>
+</div>
+
+<script>
+  function checkPassword() {
+    const pwd = document.getElementById("password").value.toLowerCase();
+    if (pwd === "truth") {
+      document.getElementById("stage2").style.display = "block";
+    } else {
+      alert("incorrect");
+    }
+  }
+
+  function checkGraph() {
+    const a = document.getElementById("a").value;
+    const b = document.getElementById("b").value;
+    const c = document.getElementById("c").value;
+
+    if (a === "2" && b === "0" && c === "-1") {
+      document.getElementById("final").style.display = "block";
+    } else {
+      alert("try again");
+    }
+  }
+</script>
+
+</body>
+</html>
