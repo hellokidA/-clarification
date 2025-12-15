@@ -43,6 +43,11 @@
       font-size: 0.9em;
       margin-top: 10px;
     }
+    .axis-inputs input {
+      width: 40px;
+      text-align: center;
+      margin-right: 5px;
+    }
   </style>
 </head>
 <body>
@@ -71,17 +76,27 @@ fail when they repeat themselves.
 
 <div id="stage2">
   <h2>Second challenge</h2>
+
   <p>
-    A system response curve is shown below.
-    Fill in the missing values.
+    The diagram below contains a hidden ordering.<br>
+    Complete the axis labels.
   </p>
 
-  <img src="diagram.png" alt="diagram" width="400">
+  <img src="diagram.png" alt="diagram" width="450">
 
   <br><br>
-  <input id="a" placeholder="value A">
-  <input id="b" placeholder="value B">
-  <input id="c" placeholder="value C">
+
+  <div class="axis-inputs">
+    <input id="i1" placeholder="O">
+    <input id="i2" placeholder="B">
+    <input id="i3" placeholder="A">
+    <input id="i4" placeholder="F">
+    <input id="i5" placeholder="G">
+    <input id="i6" placeholder="K">
+    <input id="i7" placeholder="M">
+  </div>
+
+  <br>
   <button onclick="checkGraph()">verify</button>
 </div>
 
@@ -95,7 +110,7 @@ fail when they repeat themselves.
 
 <script>
   function checkPassword() {
-    const pwd = document.getElementById("password").value.toLowerCase();
+    const pwd = document.getElementById("password").value.trim().toLowerCase();
     if (pwd === "truth") {
       document.getElementById("stage2").style.display = "block";
     } else {
@@ -104,15 +119,15 @@ fail when they repeat themselves.
   }
 
   function checkGraph() {
-    const a = document.getElementById("a").value;
-    const b = document.getElementById("b").value;
-    const c = document.getElementById("c").value;
-
-    if (a === "2" && b === "0" && c === "-1") {
-      document.getElementById("final").style.display = "block";
-    } else {
-      alert("try again");
+    const answers = ["o", "b", "a", "f", "g", "k", "m"];
+    for (let i = 0; i < answers.length; i++) {
+      const value = document.getElementById(`i${i+1}`).value.trim().toLowerCase();
+      if (value !== answers[i]) {
+        alert("incorrect alignment");
+        return;
+      }
     }
+    document.getElementById("final").style.display = "block";
   }
 </script>
 
