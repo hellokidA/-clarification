@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>clarification</title>
+
   <style>
     body {
       background: #0b0b0b;
@@ -10,23 +11,26 @@
       font-family: monospace;
       padding: 40px;
     }
+
     h1 {
       color: #7017FF;
     }
+
     .cipher {
       margin-top: 30px;
       padding: 20px;
       background: #111;
       border-left: 4px solid #7017FF;
     }
+
     input {
       background: #000;
       color: #7017FF;
       border: 1px solid #333;
       padding: 8px;
       margin-top: 10px;
-      width: 300px;
     }
+
     button {
       margin-left: 10px;
       padding: 8px 12px;
@@ -34,52 +38,28 @@
       border: none;
       cursor: pointer;
     }
+
     #stage2, #final {
       display: none;
       margin-top: 40px;
     }
+
     .hint {
       color: #999;
       font-size: 0.9em;
       margin-top: 10px;
     }
+
     .axis-inputs input {
-      width: 40px;
+      width: 60px;
       text-align: center;
-      margin-right: 5px;
+      margin-right: 6px;
     }
-  </style>
-</head>
-<body>
 
-<h1>clarification</h1>
-
-<p>
-Alan Turing once noticed that even the most sophisticated machines
-fail when they repeat themselves.
-</p>
-
-<div class="cipher">
-  <p>
-    <strong>Encrypted message:</strong><br><br>
-    QFZVZ QEVXG ZYX QFZVZ
-  </p>
-
-  <div class="hint">
-    Hint: Enigma never encrypted a letter as itself.
-  </div>
-
-  <br>
-  <input id="password" placeholder="enter decoded word">
-  <button onclick="checkPassword()">submit</button>
-</div>
-
-<div id="stage2">
-  <h2>Second challenge</h2>
-
-  <p>
-    The diagram below contains a hidden ordering.<br>
-    Complete the axis labels.
+    .axis-inputs input:disabled {
+      opacity: 0.4;
+    Although you're not much interested in such stuff, here comes the H_R diagram.<br>
+    What do the lower bar letters stand for?
   </p>
 
   <img src="HR_diagram.jpg" alt="diagram" width="450">
@@ -95,9 +75,6 @@ fail when they repeat themselves.
     <input id="i6" placeholder="K">
     <input id="i7" placeholder="M">
   </div>
-
-  <br>
-  <button onclick="checkGraph()">verify</button>
 </div>
 
 <div id="final">
@@ -109,26 +86,34 @@ fail when they repeat themselves.
 </div>
 
 <script>
-  function checkPassword() {
-    const pwd = document.getElementById("password").value.trim().toLowerCase();
-    if (pwd === "truth") {
-      document.getElementById("stage2").style.display = "block";
-    } else {
-      alert("incorrect");
-    }
+function checkPassword() {
+  const pwd = document.getElementById("password").value.trim().toLowerCase();
+  if (pwd === "password") {
+    document.getElementById("stage2").style.display = "block";
+  } else {
+    alert("incorrect");
   }
+}
 
-  function checkGraph() {
-    const answers = ["o", "b", "a", "f", "g", "k", "m"];
-    for (let i = 0; i < answers.length; i++) {
-      const value = document.getElementById(`i${i+1}`).value.trim().toLowerCase();
-      if (value !== answers[i]) {
-        alert("incorrect alignment");
-        return;
+const answers = ["oh", "be", "a", "fine", "guy", "kiss", "me"];
+
+for (let i = 0; i < answers.length; i++) {
+  const input = document.getElementById(`i${i + 1}`);
+
+  input.addEventListener("input", () => {
+    const value = input.value.trim().toLowerCase();
+
+    if (value === answers[i]) {
+      input.disabled = true;
+
+      if (i < answers.length - 1) {
+        document.getElementById(`i${i + 2}`).focus();
+      } else {
+        document.getElementById("final").style.display = "block";
       }
     }
-    document.getElementById("final").style.display = "block";
-  }
+  });
+}
 </script>
 
 </body>
