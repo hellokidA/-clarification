@@ -58,9 +58,13 @@
 
     .axis-inputs input:disabled {
       opacity: 0.4;
-    Although you're not much interested in such stuff, here comes the H_R diagram.<br>
-    What do the lower bar letters stand for?
-  </p>
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Although you're not much interested in such stuff, here comes the H_R diagram.</h1>
+  <p>What do the lower bar letters stand for?</p>
 
   <img src="HR_diagram.jpg" alt="diagram" width="450">
 
@@ -75,46 +79,37 @@
     <input id="i6" placeholder="K">
     <input id="i7" placeholder="M">
   </div>
-</div>
 
-<div id="final">
-  <h2>Final message</h2>
-  <p>
-    I built this because clarity matters to me.<br>
-    And because you matter more than you know.
-  </p>
-</div>
+  <div id="final">
+    <h2>Final message</h2>
+    <p>
+      I built this because clarity matters to me.<br>
+      And because you matter more than you know.
+    </p>
+  </div>
 
-<script>
-function checkPassword() {
-  const pwd = document.getElementById("password").value.trim().toLowerCase();
-  if (pwd === "password") {
-    document.getElementById("stage2").style.display = "block";
-  } else {
-    alert("incorrect");
-  }
-}
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const answers = ["oh", "be", "a", "fine", "guy", "kiss", "me"];
 
-const answers = ["oh", "be", "a", "fine", "guy", "kiss", "me"];
+      for (let i = 0; i < answers.length; i++) {
+        const input = document.getElementById(`i${i + 1}`);
 
-for (let i = 0; i < answers.length; i++) {
-  const input = document.getElementById(`i${i + 1}`);
+        input.addEventListener("input", () => {
+          const value = input.value.trim().toLowerCase();
 
-  input.addEventListener("input", () => {
-    const value = input.value.trim().toLowerCase();
+          if (value === answers[i]) {
+            input.disabled = true;
 
-    if (value === answers[i]) {
-      input.disabled = true;
-
-      if (i < answers.length - 1) {
-        document.getElementById(`i${i + 2}`).focus();
-      } else {
-        document.getElementById("final").style.display = "block";
+            if (i < answers.length - 1) {
+              document.getElementById(`i${i + 2}`).focus();
+            } else {
+              document.getElementById("final").style.display = "block";
+            }
+          }
+        });
       }
-    }
-  });
-}
-</script>
-
+    });
+  </script>
 </body>
 </html>
