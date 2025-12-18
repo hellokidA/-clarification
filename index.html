@@ -12,9 +12,7 @@
       padding: 40px;
     }
 
-    h1 {
-      color: #7017FF;
-    }
+    h1 { color: #7017FF; }
 
     .cipher {
       margin-top: 30px;
@@ -63,10 +61,40 @@
 </head>
 
 <body>
-  <h1>Although you're not much interested in such stuff, here comes the H_R diagram.</h1>
-  <p>What do the lower bar letters stand for?</p>
 
-  <img src="HR_diagram.jpg" alt="diagram" width="450">
+<h1>Clarification</h1>
+
+<p>
+I know you can easily check the source code and get all the answers.
+but you can also choose not to. :D
+</p>
+
+<div class="cipher">
+  <p>
+    <strong>Have fun decrypting.</strong><br><br>
+    jwqmq evbyx ldmlw euqnx xewfm wospu cuahy dkqot lpzuf tztzy cmddm ibnob nccct blzsy 
+    tetms mirxq qxlpg stoma qrwmr zkegi bgapi wnacu dmaxv bpnis tbnhl qiidr cpkgd ihkzm wqyre iqnux kihal s
+  </p>
+
+  <div class="hint">
+    It was noticed, it never encrypted a letter as itself.
+    all values: 1 , M3, UKW B.
+  </div>
+
+  <br>
+  <input id="password" placeholder="password?">
+  <button id="submitPwd">submit</button>
+</div>
+
+<div id="stage2">
+  <h2>fine, here comes the rest:</h2>
+
+  <p>
+    Although you're not much interested in such stuff, here comes the H_R diagram.
+  </p>
+
+  <img src="HR_diagram.jpg" alt="diagram" width="450"
+       onerror="this.style.display='none'">
 
   <br><br>
 
@@ -79,37 +107,41 @@
     <input id="i6" placeholder="K">
     <input id="i7" placeholder="M">
   </div>
+</div>
 
-  <div id="final">
-    <h2>Final message</h2>
-    <p>
-      I built this because clarity matters to me.<br>
-      And because you matter more than you know.
-    </p>
-  </div>
+<div id="final">
+  <h2>Final message</h2>
+  <p>
+    cause to me, this isn't just friendly.
+  </p>
+</div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const answers = ["oh", "be", "a", "fine", "guy", "kiss", "me"];
+<script>
+document.getElementById("submitPwd").onclick = () => {
+  const pwd = document.getElementById("password").value.trim().toLowerCase();
+  if (pwd === "password") {
+    document.getElementById("stage2").style.display = "block";
+  } else {
+    alert("incorrect");
+  }
+};
 
-      for (let i = 0; i < answers.length; i++) {
-        const input = document.getElementById(`i${i + 1}`);
+const answers = ["oh", "be", "a", "fine", "guy", "kiss", "me"];
 
-        input.addEventListener("input", () => {
-          const value = input.value.trim().toLowerCase();
-
-          if (value === answers[i]) {
-            input.disabled = true;
-
-            if (i < answers.length - 1) {
-              document.getElementById(`i${i + 2}`).focus();
-            } else {
-              document.getElementById("final").style.display = "block";
-            }
-          }
-        });
+answers.forEach((ans, i) => {
+  const input = document.getElementById(`i${i+1}`);
+  input.addEventListener("input", () => {
+    if (input.value.trim().toLowerCase() === ans) {
+      input.disabled = true;
+      if (i < answers.length - 1) {
+        document.getElementById(`i${i+2}`).focus();
+      } else {
+        document.getElementById("final").style.display = "block";
       }
-    });
-  </script>
+    }
+  });
+});
+</script>
+
 </body>
 </html>
